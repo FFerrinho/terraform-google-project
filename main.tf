@@ -9,7 +9,7 @@ resource "google_project" "main" {
   org_id              = each.value.org_id
   folder_id           = each.value.folder_id
   billing_account     = each.value.billing_account
-  skip_delete         = each.value.skip_delete
+  deletion_policy     = each.value.deletion_policy
   auto_create_network = each.value.auto_create_network
 
   labels = merge(each.value.labels,
@@ -21,7 +21,7 @@ resource "google_project" "main" {
 locals {
   project_api_combinations = [
     for project_name, project in var.projects : [
-      for api in project.apis : { project_name = project_name, api = api }
+      for api in coalesce(project.apis, []) : { project_name = project_name, api = api }
     ]
   ]
   flattened_combinations = flatten(local.project_api_combinations)
