@@ -3,10 +3,10 @@ module "gcp_project" {
 
   projects = {
     "prod-application" = {
-      org_id             = "1234567890"
-      billing_account    = "ABCD-EFGH-IJKL-MNOP"
-      folder_id         = "9876543210"
-      skip_delete       = true
+      org_id              = "1234567890"
+      billing_account     = "ABCD-EFGH-IJKL-MNOP"
+      folder_id           = "9876543210"
+      deletion_policy     = "PREVENT"
       auto_create_network = false
       apis = [
         "compute.googleapis.com",
@@ -24,10 +24,10 @@ module "gcp_project" {
       }
     },
     "staging-application" = {
-      org_id             = "1234567890"
-      billing_account    = "ABCD-EFGH-IJKL-MNOP"
-      folder_id         = "9876543210"
-      skip_delete       = false
+      org_id              = "1234567890"
+      billing_account     = "ABCD-EFGH-IJKL-MNOP"
+      folder_id           = "9876543210"
+      deletion_policy     = "DELETE"
       auto_create_network = true
       apis = [
         "compute.googleapis.com",

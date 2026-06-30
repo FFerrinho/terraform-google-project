@@ -13,8 +13,8 @@ variable "projects" {
 
   validation {
     condition = alltrue([
-    for project in var.projects :
-    project.deletion_policy == null || contains(["PREVENT", "ABANDON", "DELETE"], project.deletion_policy)
+      for project in var.projects :
+      project.deletion_policy == null || contains(["PREVENT", "ABANDON", "DELETE"], project.deletion_policy)
     ])
     error_message = "deletion_policy must be one of: PREVENT, ABANDON, DELETE"
   }
@@ -26,5 +26,5 @@ variable "projects" {
     ])
     error_message = "auto_create_network must be a boolean value (true/false)"
   }
-  
+
 }
